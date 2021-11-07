@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/animate.css">
+        <link rel="stylesheet" href="css/style.css">
+
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Two+Tone" rel="stylesheet">
+      
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+         <!--Compiled and minified JavaScript--> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        
+        <!-- VUE JS -->
+        <script src="js/vue.js"></script>
+        <!-- VUE Resource -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.6.1/vue-resource.min.js" integrity="sha512-NuUIe6TWdEivPTcxnihx2e6r2xQFEFPrJfpdZWoBwZF6G51Rphcf5r/1ZU/ytj4lyHwLd/YGMix4a5LqAN15XA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
+        <script src="js/whyUs.js"></script>
+        <script src="js/priceList.js"></script>
+        <script src="js/contact.js"></script>
+        <script src="js/booking.js"></script>
+        
+        <title>Teacher Booking</title>
+    </head>
+
+    <body>
+        <div id="main">
+            
+            <!-- NAVBAR -->
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo center">Professeur Particulier</a>
+                    <a href="#" data-target="slide-out" @click="animationsCon = true" class="sidenav-trigger left show-on-large">
+                      <i class="btnn material-icons">menu</i>
+                    </a>
+                </div>
+            </nav>
+
+              <!-- SIDENAV -->
+            <ul id="slide-out" class="sidenav">
+                <li>
+                    <div class="user-view">
+                        <div class="background">
+                            <img src="img/cours.jpg">
+                        </div>
+                        <a v-if="animationsCon" href="#user"><img class="circle" src="img/logo.jpg"></a>
+                        <a v-if="animationsCon" href="#name"><span class="white-text name animated fadeInRight">Jessica Doke</span></a>
+                        <a v-if="animationsCon" href="#email"><span class="white-text email animated fadeInRight">jdoke@gmail.com</span></a>
+                    </div>
+                </li>
+
+                <li v-for="link in links">
+                    <a @click="changeContent" href="javascript:;" :id="link.id" v-if="animationsCon" class="waves-effect links animated fadeInLeft">
+                        <i class="material-icons-two-tone">{{ link.icon }}</i>
+                        {{ link.title }}
+                    </a>
+                </li>
+                <!--Button Close Sidenav
+                We use animationsCon to trigger the animations-->
+                <span>
+                    <a @click="animationsCon = false" href="javascript:;" class="sidenav-close"></a>
+                </span>
+            </ul>
+         
+
+            <section class="content">
+                <booking :id=links[0].id></booking>
+                <pricelist :prices="prices" :id=links[1].id></pricelist>
+                <whyus :about="about" :id=links[2].id></whyus>
+                <contact :id=links[3].id></contact>
+            </section>
+
+
+
+        </div>
+
+
+        <script type="module">
+            document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, {});
+            });
+
+            var app = new Vue({
+                el: '#main',
+                data:
+                {
+                    links: [
+                            {title : "Réservations", icon : "alarm", id : "linkone"},
+                            {title : "Tarifs", icon : "attach_money", id : "linktwo"},
+                            {title : "Pourquoi moi ?", icon : "assignment", id : "linkthree"},
+                            {title : "Me contacter", icon : "contacts", id : "linkfour"},
+
+                    ],
+            animationsCon : true,
+                    about : [],
+                    prices : []
+                },
+
+                methods :
+                {
+                    changeContent(event)
+                    {
+                        //Closing sidenav
+                        document.getElementsByClassName('sidenav-close')[0].click();
+
+                        //on cache tous les composants et on montre que celui sélectionné (chacun a un Id unique )
+                        var clickedOption = event.srcElement.id;
+                        var componentToHide = document.getElementsByClassName('component');
+
+                        for(let x = 0; x < componentToHide.length; x++)
+                        {
+                            componentToHide[x].style.display = "none";
+                        }
+                        document.getElementsByClassName(clickedOption)[0].style.display = "block";
+                    }
+                },
+                created()
+                {
+                    //Fetching data from firebase database
+                    this.$http.get('https://projetwebm1-4bd9f-default-rtdb.europe-west1.firebasedatabase.app/whyus.json').then(function(data)
+                    {
+                        this.about = data.body;
+                    });
+
+                    this.$http.get('https://projetwebm1-4bd9f-default-rtdb.europe-west1.firebasedatabase.app/prices.json').then(function(data)
+                    {
+                        this.prices = data.body;
+                    });
+                }
+            });
+
+/*
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "../ProfParticulier/node_modules/firebase/appfire";
+            import { getAnalytics } from "../ProfParticulier/node_modules/firebase/analytics";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+            const firebaseConfig = {
+            apiKey: "AIzaSyDob4CPPGYS7EXjLNHG5KvmQ2wnElBf9Wg",
+            authDomain: "projetwebm1-4bd9f.firebaseapp.com",
+            databaseURL: "https://projetwebm1-4bd9f-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "projetwebm1-4bd9f",
+            storageBucket: "projetwebm1-4bd9f.appspot.com",
+            messagingSenderId: "799401002029",
+            appId: "1:799401002029:web:9649b35a7a98eba0a0e4a4",
+            measurementId: "G-PL7249F7WD"
+            };
+
+            // Initialize Firebase
+            const appfire = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(appfire);*/
+        </script> 
+        
+
+        
+    </body>
+</html>

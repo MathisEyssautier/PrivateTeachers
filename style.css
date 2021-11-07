@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Sofia&display=swap');
+
+body
+{
+    background : linear-gradient(180deg, rgba(77, 77, 77, 0.4), rgba(219, 219, 219, 0.4)), url("../img/cours2.jpg");
+    background-attachment: fixed;
+    background-size: 1600px;
+    background-position: center;
+    font-family: 'Kaushan Script', cursive;
+    overflow-x: hidden;
+}
+
+nav
+{
+    background: linear-gradient(rgba(77, 77, 77, 0.4), rgba(219, 219, 219, 0.4)) !important;
+    height: 130px !important;
+}
+
+.btnn
+{
+    font-size: 40px !important;
+    padding: 30px !important;
+}
+
+nav .brand-logo
+{
+    font-size: 4rem !important;
+    padding: 30px !important;
+    text-shadow: 6px 5px 4px black;
+    color: white;
+}
+
+.sidenav .user-view .circle
+{
+    height : 150px !important;
+    width: 150px !important;
+    margin: 0 auto !important;
+    animation-delay: .5s;
+}
+
+.background > img
+{
+    width: 100%;
+    height: 100%;
+    filter: brightness(0.5);
+}
+
+.sidenav .user-view .name
+{
+    font-size: 1.6rem;
+    animation-delay: .7s;
+}
+
+.sidenav .user-view .email
+{
+    font-size: 1.2rem !important;
+    animation-delay: .9s;
+}
+
+.sidenav li > a
+{
+    font-size: 2rem !important;
+    border-bottom: solid 1px lightgray;
+}
+
+.sidenav li
+{
+    padding-top: 20px;
+}
+
+#slide-out li a i
+{
+    font-size: 2.5rem;
+}
+
+
+/******************COMPONENTS******************/
+
+section.content
+{
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 60px;
+    margin-bottom: 150px;
+}
+
+.why-us, .priceList
+{
+    background: linear-gradient(45deg, rgba(77, 77, 77, 0.4), rgba(219, 219, 219, 0.4));
+    color: rgba(17, 17, 17, 0.7);
+    padding: 20px;
+    border-radius: 20px;
+    border: solid 2px black;
+}
+
+.hrhr
+{
+    border: solid 1px black;
+}
+
+.priceList
+{
+    font-size : 1.2rem;
+    text-align : center;
+}
+
+.contact
+{
+    text-align: center;
+    font-size: 3rem;
+    background: linear-gradient(45deg, rgba(77, 77, 77, 0.4), rgba(219, 219, 219, 0.4));
+    padding:20px;
+    border: solid 1px black;
+    border-radius: 20px;
+}
+
+.contact i
+{
+    font-size: 3rem;
+}
+
+::-webkit-scrollbar
+{
+    width:10px;
+}
+
+::-webkit-scrollbar-track
+{
+    background: black;
+}
+
+::-webkit-scrollbar-thumb
+{
+    background: rgb(97, 97, 97);
+    border-radius: 20px;
+    border: solid 1px black;
+}
+
+.booking
+{
+    text-align: center;
+}
+
+.customerinfo
+{
+    text-align: left;
+    font-size: 1.5rem !important;
+    color: whitesmoke !important;
+}
+
+#last_name, #phone
+{
+    font-size: 1.2rem !important;
+    color: whitesmoke !important;
+}
+
+.datepicker
+{
+    color: whitesmoke;
+    font-size: 1.2rem !important;
+}
+
+.datepicker-date-display
+{
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.4), rgba(119, 119, 119, 0.4)) !important;
+}
+
+.datepicker-table td.is-selected
+{
+    background:rgb(54, 54, 54) !important;
+}
+
+.datepicker-table td.is-today
+{
+    color:rgb(160, 0, 0)!important;
+}
+
+.datepicker-cancel, .datepicker-clear, .datepicker-cancel, .datepicker-today, .datepicker-done
+{
+     color:rgba(77, 77, 77, 0.4)!important;
+}
+
+.select-time:hover
+{
+    cursor: pointer;
+}
+
+.select-time
+{
+    color: whitesmoke;
+    font-size: 2rem;
+    text-align: left;
+}
+
+
+.notifications
+{
+    color: whitesmoke;
+    font-size: 1.6rem;
+    background: red;
+    padding: 12px;
+    border-radius: 20px;
+    position: absolute;
+    top: 175px;
+    right: 20px;
+    font-family: 'Kaushan Script';
+    display: none;
+}
+
+.component
+{
+    display: none;
+}
